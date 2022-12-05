@@ -1,6 +1,7 @@
 import {Dimensions, Pressable} from 'react-native';
 import {Image, StyleSheet} from 'react-native';
 import {Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function SignIn() {
   return (
@@ -9,8 +10,10 @@ function SignIn() {
         style={styles.backgroundImg}
         source={require('@/assets/main_img.jpeg')}
       />
+      <View style={styles.overlay} />
 
       <Pressable style={styles.kakaoButtonStyle}>
+        <Icon name="chat" size={18} color={'#000000'} />
         <Text style={styles.kakaoButtonText}>카카오톡으로 로그인하기</Text>
       </Pressable>
 
@@ -31,17 +34,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 100,
   },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.2)',
+  },
   backgroundImg: {
+    ...StyleSheet.absoluteFillObject,
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
   },
 
   kakaoButtonStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 50,
     paddingVertical: 12,
     borderRadius: 8,
@@ -49,6 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fae100',
   },
   kakaoButtonText: {
+    marginLeft: 6,
     textAlign: 'center',
     fontSize: 13,
   },
