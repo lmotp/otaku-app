@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     marginLeft: 6,
     textAlign: 'center',
     fontSize: 13,
+    fontWeight: '700',
   },
 
   loginWrap: {
