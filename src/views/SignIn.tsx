@@ -1,9 +1,17 @@
+import {RootStackParamList} from '@/../App';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Dimensions, Pressable} from 'react-native';
 import {Image, StyleSheet} from 'react-native';
 import {Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-function SignIn() {
+type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
+
+function SignIn({navigation}: SignInScreenProps) {
+  const onPressToSignUp = () => {
+    navigation.navigate('SignUp');
+  };
+
   return (
     <View style={styles.wrap}>
       <Image
@@ -12,16 +20,34 @@ function SignIn() {
       />
       <View style={styles.overlay} />
 
-      <Pressable style={styles.kakaoButtonStyle}>
-        <Icon name="chat" size={18} color={'#000000'} />
-        <Text style={styles.kakaoButtonText}>카카오톡으로 로그인하기</Text>
-      </Pressable>
+      <Image style={styles.logo} source={require('@assets/logo.png')} />
 
-      <View style={styles.loginWrap}>
-        <Text style={styles.loginText}>계정이 없으신가요?</Text>
-        <Pressable>
-          <Text style={styles.loginTextBold}>가입하기</Text>
-        </Pressable>
+      <View>
+        <View style={styles.snsButtonWrap}>
+          <Pressable
+            style={StyleSheet.compose(styles.snsButtonStyle, styles.kakao)}>
+            <Icon name="chat" size={18} color={'#000000'} />
+            <Text
+              style={StyleSheet.compose(
+                styles.snsButtonText,
+                styles.kakaoText,
+              )}>
+              카카오톡으로 로그인하기
+            </Text>
+          </Pressable>
+          <Pressable
+            style={StyleSheet.compose(styles.snsButtonStyle, styles.twitter)}>
+            <Icon name="twitter" size={18} color={'#ffffff'} />
+            <Text style={styles.snsButtonText}>트위터로 로그인하기</Text>
+          </Pressable>
+        </View>
+
+        <View style={styles.loginWrap}>
+          <Text style={styles.loginText}>계정이 없으신가요?</Text>
+          <Pressable onPress={onPressToSignUp}>
+            <Text style={styles.loginTextBold}>가입하기</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -30,37 +56,52 @@ function SignIn() {
 const styles = StyleSheet.create({
   wrap: {
     height: Dimensions.get('window').height,
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingBottom: 100,
+    paddingBottom: 80,
+    paddingTop: 160,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: 'rgba(0,0,0,0.25)',
   },
   backgroundImg: {
     ...StyleSheet.absoluteFillObject,
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
   },
+  logo: {
+    width: 200,
+    height: 100,
+    resizeMode: 'cover',
+  },
 
-  kakaoButtonStyle: {
+  snsButtonWrap: {
+    marginBottom: 10,
+  },
+  snsButtonStyle: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 50,
+    justifyContent: 'center',
+    width: 230,
     paddingVertical: 12,
     borderRadius: 8,
     marginBottom: 10,
-    backgroundColor: '#fae100',
+    backgroundColor: 'tranparent',
   },
-  kakaoButtonText: {
+  kakao: {backgroundColor: '#fae100'},
+  twitter: {backgroundColor: '#1da1fe'},
+  snsButtonText: {
     marginLeft: 6,
     textAlign: 'center',
     fontSize: 13,
     fontWeight: '700',
+    color: '#ffffff',
   },
+  kakaoText: {color: '#000000'},
 
   loginWrap: {
+    justifyContent: 'center',
     flexDirection: 'row',
     paddingBottom: 3,
   },

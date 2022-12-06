@@ -4,7 +4,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SignIn from '@/views/SignIn';
 import SignUp from '@/views/SignUp';
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
   return (
