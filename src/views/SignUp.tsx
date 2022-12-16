@@ -7,13 +7,15 @@ export type SignUpParamList = {
   SecondPage: undefined;
 };
 
-const Stack = createStackNavigator();
-function SignUp({}) {
+const Stack = createStackNavigator<SignUpParamList>();
+
+function SignUp() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerMode: 'float',
+        cardOverlayEnabled: false,
         ...TransitionPresets.SlideFromRightIOS,
+        headerShown: false,
       }}>
       <Stack.Screen name="FirstPage" component={FirstPage} />
       <Stack.Screen name="SecondPage" component={SecondPage} />
