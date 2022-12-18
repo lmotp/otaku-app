@@ -1,22 +1,27 @@
-import {SignUpParamList} from '@/views/SignUp';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {categories} from '@/data/category';
 import React from 'react';
-import {Pressable, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {FlatList} from 'react-native-gesture-handler';
+import Categories from './Categories';
 
 function SecondPage() {
-  const navigation = useNavigation<NavigationProp<SignUpParamList>>();
-  const onPressBackStep = () => {
-    navigation.goBack();
-  };
-
   return (
-    <View>
-      <Text>SecondPage</Text>
-      <Pressable onPress={onPressBackStep}>
-        <Text>뒤로가기</Text>
-      </Pressable>
+    <View style={styles.categoryWrap}>
+      <FlatList
+        data={categories}
+        keyExtractor={(item: any) => item.category}
+        renderItem={Categories}
+      />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  categoryWrap: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+  },
+});
 
 export default SecondPage;

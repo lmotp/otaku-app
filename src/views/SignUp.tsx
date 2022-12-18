@@ -1,25 +1,48 @@
 import FirstPage from '@/components/SignUp/FirstPage';
 import SecondPage from '@/components/SignUp/SecondPage';
-import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {useCallback, useState} from 'react';
+import {Pressable, Text, View} from 'react-native';
+import common from '../components/SignUp/common/style';
+import Icon from 'react-native-vector-icons/AntDesign';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '@/../App';
 
-export type SignUpParamList = {
-  FirstPage: undefined;
-  SecondPage: undefined;
-};
+type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
 
-const Stack = createStackNavigator<SignUpParamList>();
+function SignUp({navigation}: SignInScreenProps) {
+  const [count, setCount] = useState(0);
 
-function SignUp() {
+  const onPressNextStep = useCallback(() => {
+    setCount(prev => prev + 1);
+  }, []);
+
+  const onPressBackStep = useCallback(() => {
+    if (count === 0) {
+      return navigation.goBack();
+    }
+
+    setCount(prev => prev - 1);
+  }, [count, navigation]);
+
   return (
-    <Stack.Navigator
-      screenOptions={{
-        cardOverlayEnabled: false,
-        ...TransitionPresets.SlideFromRightIOS,
-        headerShown: false,
-      }}>
-      <Stack.Screen name="FirstPage" component={FirstPage} />
-      <Stack.Screen name="SecondPage" component={SecondPage} />
-    </Stack.Navigator>
+    <>
+      <View style={common.container}>
+        <View style={common.innerContainer}>
+          <Pressable style={common.iconWrap} onPress={onPressBackStep}>
+            <Icon name="arrowleft" size={24} color={'#000000'} />
+          </Pressable>
+          <View style={common.progressBarBox}>
+            <View style={common.progressBar} />
+            <View style={common.activeProgressBar} />
+          </View>
+          {count === 0 ? <FirstPage /> : <SecondPage />}
+        </View>
+
+        <Pressable style={common.nextStepButton} onPress={onPressNextStep}>
+          <Text style={common.nextStepButtonText}>다음</Text>
+        </Pressable>
+      </View>
+    </>
   );
 }
 

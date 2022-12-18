@@ -3,19 +3,54 @@ import {Dimensions, StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     display: 'flex',
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 10,
+    paddingVertical: 20,
+    backgroundColor: 'white',
+  },
+  innerContainer: {
+    width: Dimensions.get('window').width,
+    paddingHorizontal: 20,
+  },
+  iconWrap: {
+    alignSelf: 'flex-start',
+    marginBottom: 10,
+  },
 
-    height: Dimensions.get('window').height,
+  progressBarBox: {
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: 18,
+  },
+  progressBar: {
+    display: 'flex',
+    flex: 1,
+    height: 3,
+    backgroundColor: '#ddd',
+  },
+  activeProgressBar: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width: 100,
+    height: 3,
+    backgroundColor: 'red',
+  },
+
+  titleWrap: {
+    marginBottom: 14,
   },
   title: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '700',
+    letterSpacing: 1,
   },
 
   nextStepButton: {
-    paddingVertical: 10,
-    width: Dimensions.get('window').width - 20,
+    width: Dimensions.get('window').width - 40,
+    paddingVertical: 12,
     backgroundColor: 'blue',
     borderRadius: 10,
   },
@@ -27,7 +62,19 @@ export default StyleSheet.create({
     color: 'white',
   },
 
+  inputWrapper: {
+    marginBottom: 14,
+  },
+  label: {
+    fontWeight: 'bold',
+    fontSize: 14,
+    marginBottom: 6,
+  },
   input: {
+    paddingLeft: 12,
+    paddingVertical: 10,
     borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 6,
+    fontSize: 14,
   },
 });
